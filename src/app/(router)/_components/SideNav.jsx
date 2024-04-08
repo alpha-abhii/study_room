@@ -1,4 +1,5 @@
 'use client'
+import { useUser } from '@clerk/nextjs'
 import { BadgeCheck, BadgeIcon, BookOpen, GraduationCap, LayoutDashboard, LayoutGrid, Mail } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,27 +7,28 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 
 const SideNav = () => {
+    const {user} = useUser();
     const menu=[
         {
           id:8,
           name:'Dashboard',
           icon:LayoutDashboard,
           path:'/dashboard',
-        //   auth:user
+          auth:user
         },
         {
           id:1,
           name:'All Courses',
           icon:BookOpen,
           path:'/courses',
-        //   auth:true
+          auth:true
         },
         {
           id:2,
           name:'Study_Time Pro',
           icon:BadgeCheck,
           path:'/study_time-pro',
-        //   auth:true
+          auth:true
     
         },
         {
@@ -34,7 +36,7 @@ const SideNav = () => {
           name:'Store',
           icon:LayoutGrid,
           path:'/store',
-        //   auth:true
+          auth:true
         },
         
         {
@@ -42,14 +44,14 @@ const SideNav = () => {
           name:'Be Instructor',
           icon:GraduationCap,
           path:'/instructor',
-        //   auth:true
+          auth:true
         },
         {
           id:5,
           name:'Newsletter',
           icon:Mail,
           path:'/newsletter',
-        //   auth:true
+          auth:true
         }
       ]
 
@@ -65,7 +67,7 @@ const SideNav = () => {
             {/* Menu List */}
             <div className='mt-5'>
                 
-                {menu.map((item,index)=>(
+                {menu.map((item,index)=>item.auth&&(
                     <Link href={item.path}>
                         <div className={`group flex gap-3
                             mt-2 p-3 text-[18px] items-center
