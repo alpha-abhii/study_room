@@ -127,6 +127,12 @@ const getuserEnrolledCourseDetails=async(id,email)=>{
     userEnrollCourses(where: {id: "`+id+`", userEmail: "`+email+`"}) {
       id
       userEmail
+      completedChapter {
+        ... on CompletedChapter {
+          id
+          chapterId
+        }
+      }
       courseList {
         author
         banner {
@@ -158,6 +164,24 @@ const getuserEnrolledCourseDetails=async(id,email)=>{
   return result;
 }
 
+const markChapterCompleted=async(enrollId,chapterId)=>{
+  const query=gql`
+  mutation MyMutation {
+    updateUserEnrollCourse(
+      data: {completedChapter: {create: {CompletedChapter: {data: {chapterId: "`+chapterId+`"}}}}}
+      where: {id: "`+enrollId+`"}
+    ){
+      id
+    }
+    publishUserEnrollCourse(where: {id: "`+enrollId+`"}) {
+      id
+    }
+  }
+  `
+  const result = await request(MASTER_URL,query)
+  return result;
+}
+
 export default{
     getAllCourseList,
     getSideBanner,
@@ -165,4 +189,5 @@ export default{
     enrollToCourse,
     checkUserEnrolledToCourse,
     getuserEnrolledCourseDetails,
+    markChapterCompleted
 }

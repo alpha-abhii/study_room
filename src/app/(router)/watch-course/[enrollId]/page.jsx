@@ -4,11 +4,13 @@ import { useUser } from '@clerk/nextjs'
 import React, { useEffect, useState } from 'react'
 import CourseVideoDescription from '../../course-preview/[courseId]/_components/CourseVideoDescription'
 import CourseContentSection from '../../course-preview/[courseId]/_components/CourseContentSection'
+import { toast } from 'sonner'
 
 const WatchCourse = ({params}) => {
   const {user} = useUser();
   const [courseInfo, setCourseInfo] = useState([]);
   const [activeChapterIndex, setActiveChapterIndex] = useState(0);
+  const [completedChapter, setCompletedChapter] = useState([]);
 
   useEffect(()=>{
     params&&user&&getUserEnrolledCourseDetail();
@@ -17,8 +19,21 @@ const WatchCourse = ({params}) => {
   const getUserEnrolledCourseDetail=()=>{
     GlobalApi.getuserEnrolledCourseDetails(params.enrollId,user.primaryEmailAddress.emailAddress)
       .then(res=>{
+        setCompletedChapter(res.userEnrollCourses[0].completedChapter)
         setCourseInfo(res.userEnrollCourses[0].courseList);
       })
+  }
+
+  //save completed chapter id
+  const onChapterComplete=(chapterId)=>{
+      GlobalApi.markChapterCompleted(params.enrollId,chapterId)
+        .then(res=>{
+          console.log(res);
+          if(res){
+            toast('Chapter Marked as Completed!!');
+            getUserEnrolledCourseDetail();
+          }
+        })
   }
   return courseInfo.name&&(
     <div>
@@ -29,6 +44,7 @@ const WatchCourse = ({params}) => {
             courseInfo={courseInfo}
             activeChapterIndex={activeChapterIndex}
             watchMode={true}
+            setChapterCompleted={(chapterId)=>onChapterComplete(chapterId)}
             />
   
         </div>
@@ -36,7 +52,9 @@ const WatchCourse = ({params}) => {
         {/* Course Content  */}
         <div>
             <CourseContentSection 
-            courseInfo={courseInfo} isUserAlreadyEnrolled={true} watchMode={true} setActiveChapterIndex={(index)=>{setActiveChapterIndex(index)}}
+            courseInfo={courseInfo} isUserAlreadyEnrolled={true} watchMode={true} 
+            completedChapter={completedChapter}
+            setActiveChapterIndex={(index)=>{setActiveChapterIndex(index)}}
             />
         </div>
     </div>
