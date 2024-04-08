@@ -182,6 +182,44 @@ const markChapterCompleted=async(enrollId,chapterId)=>{
   return result;
 }
 
+const getUserAllEnrolledCourseList=async(email)=>{
+  const query=gql`
+  query MyQuery {
+    userEnrollCourses(where: {userEmail: "`+email+`"}) {
+      completedChapter {
+        ... on CompletedChapter {
+          id
+          chapterId
+        }
+      }
+      courseId
+      courseList {
+        id
+        name
+        totalChapters
+        slug
+        sourceCode
+        free
+        description
+        demoUrl
+        chapter(first: 50) {
+          ... on Chapter {
+            id
+            name
+          }
+        }
+        author
+        banner {
+          url
+        }
+      }
+    }
+  }
+  `
+  const result = await request(MASTER_URL,query)
+  return result;
+}
+
 export default{
     getAllCourseList,
     getSideBanner,
@@ -189,5 +227,6 @@ export default{
     enrollToCourse,
     checkUserEnrolledToCourse,
     getuserEnrolledCourseDetails,
-    markChapterCompleted
+    markChapterCompleted,
+    getUserAllEnrolledCourseList
 }
