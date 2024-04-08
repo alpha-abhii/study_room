@@ -13,6 +13,7 @@ const CourseVideoDescription = ({courseInfo}) => {
         {/* Video Player  */}
         <VideoPlayer
         videoUrl={courseInfo?.chapter[0]?.video?.url}
+        poster={courseInfo?.banner?.url}
         />
 
         {/* Description  */}
