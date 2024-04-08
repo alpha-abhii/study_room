@@ -2,8 +2,8 @@ import React from 'react'
 import VideoPlayer from './VideoPlayer'
 import Markdown from 'react-markdown'
 
-const CourseVideoDescription = ({courseInfo}) => {
-    console.log(courseInfo.description)
+const CourseVideoDescription = ({courseInfo,activeChapterIndex,watchMode=false}) => {
+    // console.log(courseInfo.description)
   return (
     <div>
         <h2 className='text-[20px] font-semibold'>{courseInfo.name}</h2>
@@ -12,15 +12,26 @@ const CourseVideoDescription = ({courseInfo}) => {
 
         {/* Video Player  */}
         <VideoPlayer
-        videoUrl={courseInfo?.chapter[0]?.video?.url}
-        poster={courseInfo?.banner?.url}
+        videoUrl={courseInfo?.chapter[activeChapterIndex]?.video?.url}
+        poster={!watchMode?courseInfo?.banner?.url:null}
         />
 
         {/* Description  */}
-        <h2 className='mt-5 text-[17px] font-semibold'>About this Course</h2>
+        <h2 className='mt-5 text-[17px] font-semibold'>
+          {watchMode?
+            <span>{courseInfo?.chapter[activeChapterIndex]?.name}</span>
+            : <span>About this Course</span>
+          }
+        </h2>
         
-            <Markdown className='text-[13px]
-            font-light mt-2 leading-7'>{courseInfo.description}</Markdown>
+        {watchMode?
+        <Markdown className='text-[13px] font-light mt-2 leading-7'>
+        {courseInfo?.chapter[activeChapterIndex]?.shortDesc}
+      </Markdown>
+        :<Markdown className='text-[13px] font-light mt-2 leading-7'>
+          {courseInfo.description}
+        </Markdown>
+        }
         
     </div>
   )
