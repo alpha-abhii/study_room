@@ -63,7 +63,13 @@ const SideNav = () => {
 
     return (
         <div className='p-5 bg-white shadow-sm border h-screen'>
-            <Image src='/logo.svg' alt='logo' width={150} height={50}/>
+            <div className='flex gap-2 justify-center items-center'>
+              <Image src='/logo.svg' alt='logo' width={50} height={50}/>
+              <span>
+              <span className='text-primary font-extrabold underline hover:text-black'>STUDY</span>
+              <span className='text-black hover:text-primary underline'>ROOM</span>
+              </span>
+            </div>
             <hr className='mt-7'/>
             {/* Menu List */}
             <div className='mt-5'>
