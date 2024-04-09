@@ -15,7 +15,7 @@ const CourseContentSection = ({courseInfo,isUserAlreadyEnrolled,watchMode=false,
     <div className='p-3 bg-white rounded-sm mt-3'>
         <h2>Contents</h2>
         {courseInfo.chapter.map((item,index)=>(
-            <div>
+            <div key={index}>
                 <h2 className={`p-2 text-[14px] 
                 flex justify-between items-center m-2 hover:bg-gray-200 hover:text-gray-500 border rounded-sm px-4 cursor-pointer 
                 ${activeIndex==index &&'bg-primary text-white'} 
