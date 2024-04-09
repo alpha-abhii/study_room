@@ -13,7 +13,7 @@ const InProgressCourseList = ({userEnrolledCourses}) => {
                     <ProgressCourseItem key={index} course={item}/>
                 ))
                 :[1,2,3,4,5].map((item,index)=>(
-                    <div className='h-[200px] w-[230px] bg-slate-200 animate-pulse'></div>
+                    <div key={index} className='h-[200px] w-[230px] bg-slate-200 animate-pulse'></div>
                 ))
             }
 

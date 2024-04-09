@@ -57,9 +57,9 @@ const SideNav = () => {
 
         const path = usePathname();
 
-        useEffect(()=>{
-          console.log("Path::",path)
-        },[]);
+        // useEffect(()=>{
+        //   console.log("Path::",path)
+        // },[]);
 
     return (
         <div className='p-5 bg-white shadow-sm border h-screen'>
@@ -69,7 +69,7 @@ const SideNav = () => {
             <div className='mt-5'>
                 
                 {menu.map((item,index)=>item.auth&&(
-                    <Link href={item.path}>
+                    <Link key={index} href={item.path}>
                         <div className={`group flex gap-3
                             mt-2 p-3 text-[18px] items-center
                             text-gray-500 cursor-pointer
