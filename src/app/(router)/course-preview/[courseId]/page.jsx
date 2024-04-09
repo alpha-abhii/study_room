@@ -1,5 +1,5 @@
 "use client"
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CourseVideoDescription from './_components/CourseVideoDescription'
 import GlobalApi from '@/app/_utils/GlobalApi'
 import CourseEnrollSection from './_components/CourseEnrollSection'

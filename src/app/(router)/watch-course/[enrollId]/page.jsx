@@ -52,7 +52,9 @@ const WatchCourse = ({params}) => {
         {/* Course Content  */}
         <div>
             <CourseContentSection 
-            courseInfo={courseInfo} isUserAlreadyEnrolled={true} watchMode={true} 
+            courseInfo={courseInfo} 
+            isUserAlreadyEnrolled={true} 
+            watchMode={true} 
             completedChapter={completedChapter}
             setActiveChapterIndex={(index)=>{setActiveChapterIndex(index)}}
             />
