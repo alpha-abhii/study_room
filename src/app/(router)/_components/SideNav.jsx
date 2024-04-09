@@ -55,11 +55,12 @@ const SideNav = () => {
         }
       ]
 
-        const path = usePathname(
-            useEffect(()=>{
-                console.log("Path::",path)
-            },[])
-        );
+        const path = usePathname();
+
+        useEffect(()=>{
+          console.log("Path::",path)
+        },[]);
+
     return (
         <div className='p-5 bg-white shadow-sm border h-screen'>
             <Image src='/logo.svg' alt='logo' width={150} height={50}/>
