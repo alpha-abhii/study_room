@@ -13,7 +13,7 @@ const ProgressCourseItem = ({course}) => {
     }
 
   return (
-    <Link href={"/course-preview"+course?.courseList?.slug}>
+    <Link href={"/course-preview/"+course?.courseList?.slug}>
     <div className='border rounded-md hover:shadow-md hover:shadow-purple-300 cursor-pointer'>
         <Image src={course.courseList?.banner?.url}
         width={500}
