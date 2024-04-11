@@ -3,6 +3,7 @@ import { useUser } from '@clerk/nextjs'
 import React, { useEffect,useState } from 'react'
 import GlobalApi from '@/app/_utils/GlobalApi';
 import WelcomeBannerInstructorDashboard from './_components/WeclcomeBannerInstuctorDashboard';
+import OurTeachers from './_components/OurTeachers';
 
 const InstructorDashboard = () => {
   const {user} = useUser();
@@ -32,6 +33,7 @@ const InstructorDashboard = () => {
 
                 {/* In progress course list  */}
                 {/* <InProgressCourseList userEnrolledCourses={userEnrolledCourses}/> */}
+                <OurTeachers/>
             </div>
 
             {/* Right Container */}
