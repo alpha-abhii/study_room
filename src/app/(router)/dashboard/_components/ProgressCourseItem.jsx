@@ -3,12 +3,26 @@ import Link  from 'next/link'
 import Image from 'next/image'
 import React from 'react'
 
-const ProgressCourseItem = ({course}) => {
+function countUniqueValues(arr) {
+    const uniqueValues = new Set();
 
+    // Extract unique values
+    arr.forEach(obj => {
+        uniqueValues.add(obj.chapterId);
+    });
+
+    // Count unique values
+    return uniqueValues.size;
+}
+
+const ProgressCourseItem = ({course}) => {
+    let uniqueChp=countUniqueValues(course.completedChapter);
     const getTotalCompletedChapterPerc=(item)=>{
-        // console.log(item.completedChapter)
+        // console.log("hellslalsl::",countUniqueValues(item.completedChapter))
+        // console.log("slalsdfjlasf:::::",item.completedChapter)
         // console.log(item.courseList.chapter.length)
-        const perc = ((Math.min(course.completedChapter?.length,course?.courseList?.chapter?.length))/(item?.courseList?.chapter?.length))*100;
+        // const perc = ((Math.min(course.completedChapter?.length,course?.courseList?.chapter?.length))/(item?.courseList?.chapter?.length))*100;
+        const perc = ((uniqueChp)/(item?.courseList?.chapter?.length))*100;
         return perc.toFixed(0);
     }
 
@@ -28,7 +42,7 @@ const ProgressCourseItem = ({course}) => {
             <h2 className='text-[12px] text-gray-400'>
                 {course.courseList.author}
             </h2>
-            <h2 className='text-[12px] text-gray-400 mt-3'>{getTotalCompletedChapterPerc(course)}% <span className='float-right'>{Math.min(course.completedChapter?.length,course?.courseList?.chapter?.length)}/{course?.courseList?.chapter?.length} Chapters</span></h2>
+            <h2 className='text-[12px] text-gray-400 mt-3'>{getTotalCompletedChapterPerc(course)}% <span className='float-right'>{uniqueChp}/{course?.courseList?.chapter?.length} Chapters</span></h2>
             <Progress value={getTotalCompletedChapterPerc(course)} className='h-[7px]'/>
         </div>
     </div>
