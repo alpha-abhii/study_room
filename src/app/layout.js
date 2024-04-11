@@ -18,10 +18,6 @@ export default function RootLayout({ children }) {
         <body className={inter.className}>
           {children}
           <Toaster/>
-          <script
-            src='//in.fw-cdn.com/31827004/949315.js'
-            chat='true'>
-          </script>
         </body>
       </html>
     </ClerkProvider>
