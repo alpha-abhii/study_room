@@ -1,10 +1,11 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const OurTeachers = () => {
     return (
         <div className='grid grid-cols-2 lg:grid-cols-3 gap-5 mt-4'>
-            <a href="#" className="block">
+            <Link href="#" className="block">
                 {/* <img
                     alt=""
                     src="https://unsplash.com/photos/smiling-woman-standing-while-holding-orange-folder-FcLyt7lW5wg"
@@ -17,7 +18,7 @@ const OurTeachers = () => {
                 <p className="mt-2 max-w-sm text-gray-700">
                     <strong>Expertise::</strong> DataScience, Machine Learning
                 </p>
-            </a>
+            </Link>
         </div>
     )
 }

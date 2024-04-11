@@ -33,7 +33,7 @@ const InstructorDashboard = () => {
 
                 {/* In progress course list  */}
                 {/* <InProgressCourseList userEnrolledCourses={userEnrolledCourses}/> */}
-                <OurTeachers/>
+                <OurTeachers/>         
             </div>
 
             {/* Right Container */}
